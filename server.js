@@ -8,7 +8,7 @@ const hour = date.getHours()
 
 //the middleware
 app.use((req, res, next) => {
-    if (day >= 1 && day <= 5 && hour >= 9 && hour < 23) {
+    if (day >= 1 && day <= 5 && hour >= 9 && hour < 01) {
         next();
     } else {
 
@@ -21,7 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 
 // {Listen}   declare the port and the callbackfunction
-app.listen(6000, err => {
-    if (err) console.log('sorry we are closed now ');
-    else console.log('welcome to our office');
+app.listen(3000, () => {
+   console.log('the server running very well')
 });
