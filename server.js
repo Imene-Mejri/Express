@@ -7,20 +7,28 @@ const hour = date.getHours()
 
 
 //the middleware
-app.use((req, res, next) => {
-    if (day >= 1 && day <= 5 && hour >= 9 && hour < 01) {
-        next();
+const middleware = (req, res, next) => {
+    next()
+
+}
+app.use((middleware) => {
+    if ((hour > 8) && (hour < 17) && (day < 6)) {
+        res.sendFile(__dirname + '/public/home.html');
+
+      
     } else {
 
-        res.sendFile(path.join(__dirname, 'public', 'close.html'))
-
+        res.sendFile(__dirname + '/public/close.html')
+     
     }
 });
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(__dirname, 'public'));
 
 
 // {Listen}   declare the port and the callbackfunction
-app.listen(3000, () => {
-   console.log('the server running very well')
-});
+
+app.listen(3000, (error) => {
+    if (error) console.log('serveur is not running')
+    else console.log('sever is running on port 3000')
+})
