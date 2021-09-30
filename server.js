@@ -5,34 +5,29 @@ const express = require('express');
 const app = express();
 
 const hour = new Date().getHours();
-console.log(hour)
+
 const day = new Date().getDay();
-console.log(day)
+
    
 
-const middlewrare=(req,res,next)=>{
-    console.log('text from middleware')
+app.use((req,res,next)=>{
+    if (day >= 1 && day <= 5 && hour >= 9 && hour < 18) 
+    res.sendFile(__dirname +'/public/close.html');
+    /* else res.sendFile(__dirname + '/public/home.html') */
     next()
-}
-app.use(middlewrare)
-//the middleware
+})
 
-app.get('/',(req, res) => {
-    if (day >= 1 && day <= 5 && hour >= 9 && hour < 17) {
-        res.sendFile(__dirname +'/public/home.html');
-      next();
-    } else {
-       
-      res.sendFile(__dirname,+ 'public/close.html')
+app.get('/', (req, res)=> {
+    res.sendFile(__dirname + '/public/home.html')
+  }); 
     
-  
-    }
-  });
-  app.use(express.static(__dirname, 'public'))
+
+  app.use(express.static(__dirname + 'public'))
 // {Listen}   declare the port and the callbackfunction
 
 
-app.listen(3000,()=>{
+app.listen(4000,(error)=>{
+    error?console.log(error):
 console.log('the server is running')
 })
 ;
