@@ -10,21 +10,18 @@ const day = new Date().getDay();
 console.log(day)
 
 //the middleware
-app.get('/',(req,res)=>{
-    if((day >= 1 && day <= 5 && hour >= 9 && hour < 17))
-    Next()
-     res.sendFile(__dirname + '/public/home.html');
-   
-});
-
-    
-     res.sendFile(__dirname + '/public/close.html')
-
-     app.use(express.static(__dirname, 'public'));
-
+app.use((req, res, next) => {
+    if (day >= 1 && day <= 5 && hour >= 9 && hour < 17) {
+      next();
+    } else {
+       
+          res.sendFile(path.join(__dirname, 'public', 'closed.html'))
+  
+    }
+  });
 
 // {Listen}   declare the port and the callbackfunction
 
-app.listen(3000,() =>{
+app.listen(3000,()=>{
 console.log('the server is running')
 }
