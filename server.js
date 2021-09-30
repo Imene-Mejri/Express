@@ -1,6 +1,6 @@
    
 const express = require('express');
-const { Next } = require('react-bootstrap/esm/PageItem');
+
 
 const app = express();
 
@@ -15,7 +15,8 @@ app.use((req, res, next) => {
       next();
     } else {
        
-          res.sendFile(path.join(__dirname, 'public', 'closed.html'))
+          res.sendFile(path.join(__dirname, 'public', 'close.html'))
+    
   
     }
   });
@@ -24,4 +25,5 @@ app.use((req, res, next) => {
 
 app.listen(3000,()=>{
 console.log('the server is running')
-}
+})
+;
