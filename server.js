@@ -1,31 +1,30 @@
-const express = require('express')
-const app = express()
-const path = require('path')
-const date = new Date();
-const day = date.getDay()
-const hour = date.getHours()
+   
+const express = require('express');
+const { Next } = require('react-bootstrap/esm/PageItem');
 
+const app = express();
+
+const hour = new Date().getHours();
+console.log(hour)
+const day = new Date().getDay();
+console.log(day)
 
 //the middleware
-
-app.use((req, res, next) => {
-    if ((hour>8) && (hour<01)&&(day<6) ) {
-        res.sendFile(__dirname + '/public/home.html');
-    
-        next();
-    } else {
-
-        res.sendFile(__dirname+ '/public/close.html')
-        next();
-    }
+app.get('/',(req,res)=>{
+    if((day >= 1 && day <= 5 && hour >= 9 && hour < 17))
+    Next()
+     res.sendFile(__dirname + '/public/home.html');
+   
 });
 
-app.use(express.static(__dirname, 'public'));
+    
+     res.sendFile(__dirname + '/public/close.html')
+
+     app.use(express.static(__dirname, 'public'));
 
 
 // {Listen}   declare the port and the callbackfunction
 
-app.listen(3000,(error)=>{
-    if (error) console.log('serveur is not running')
-    else console.log ('sever is running on port 3000')
-})
+app.listen(3000,() =>{
+console.log('the server is running')
+}
